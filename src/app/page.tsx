@@ -57,8 +57,6 @@ export default async function Home() {
     }
   }
 
-  console.log(experiences);
-
   return (
     <main className={twclsx('p-[20px]')}>
       {introduce?.intro && (

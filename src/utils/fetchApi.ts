@@ -7,7 +7,6 @@ type RequestOptions = {
 } & RequestInit;
 
 const customFetch = (url: string, options?: RequestInit) => {
-  console.log('url', url);
   return fetch(url, {
     credentials: 'include',
     headers: {
@@ -90,4 +89,4 @@ const fetchApi = (baseUrl: string) => {
   };
 };
 
-export default fetchApi('http://localhost:3000');
+export default fetchApi(process.env.NEXT_PUBLIC_URL!);

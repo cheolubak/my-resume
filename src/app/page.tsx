@@ -13,6 +13,11 @@ import { FaGithub } from 'react-icons/fa';
 import { SiTistory } from 'react-icons/si';
 import { FiExternalLink } from 'react-icons/fi';
 import { LuSend } from 'react-icons/lu';
+import SubTitle from '@/components/SubTitle';
+import Description from '@/components/Description';
+import Contacts from '@/components/Contacts';
+import OpenLink from '@/components/OpenLink';
+import MailLink from '@/components/MailLink';
 
 export default async function Home() {
   console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL);
@@ -79,118 +84,50 @@ export default async function Home() {
         </h1>
       )}
       {introduce?.description && (
-        <pre
-          className={twclsx(
-            'text-body',
-            'text-lightslate',
-            'whitespace-pre-wrap',
-            'mb-[48px]',
-          )}
-        >
-          {introduce.description}
-        </pre>
+        <Description>{introduce.description}</Description>
       )}
-      <h3 className={twclsx('text-h3', 'mb-[12px]')}>Contact.</h3>
-      <ul className={twclsx('flex', 'flex-col', 'gap-[12px]', 'mb-[48px]')}>
+      <SubTitle>Contact.</SubTitle>
+      <Contacts>
         {introduce?.email && (
-          <li className={twclsx('flex', 'justify-start', 'items-center')}>
-            <span
-              className={twclsx(
-                'w-[100px]',
-                'inline-flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-                'text-bold',
-              )}
-            >
+          <Contacts.Item>
+            <Contacts.Title>
               <MdEmail size={24} />
               Email.
-            </span>
-            <Link
-              href={`mailto:${introduce.email}`}
-              className={twclsx(
-                'text-link',
-                'text-secondary-75',
-                'inline-flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-                'underline',
-              )}
-            >
+            </Contacts.Title>
+            <MailLink href={`mailto:${introduce.email}`}>
               {introduce.email}
-              <LuSend />
-            </Link>
-          </li>
+            </MailLink>
+          </Contacts.Item>
         )}
         {introduce?.git && (
-          <li className={twclsx('flex', 'justify-start', 'items-center')}>
-            <span
-              className={twclsx(
-                'w-[100px]',
-                'inline-flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-                'text-bold',
-              )}
-            >
+          <Contacts.Item>
+            <Contacts.Title>
               <FaGithub size={24} />
               Git.
-            </span>
-            <Link
+            </Contacts.Title>
+            <OpenLink
               href={introduce.git}
               target='_blank'
-              className={twclsx(
-                'text-link',
-                'text-secondary-75',
-                'inline-flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-                'underline',
-              )}
             >
               {introduce.git}
-              <FiExternalLink />
-            </Link>
-          </li>
+            </OpenLink>
+          </Contacts.Item>
         )}
         {introduce?.blog && (
-          <li className={twclsx('flex', 'justify-start', 'items-center')}>
-            <span
-              className={twclsx(
-                'w-[100px]',
-                'inline-flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-                'text-bold',
-              )}
-            >
+          <Contacts.Item>
+            <Contacts.Title>
               <SiTistory size={24} />
               Blog.
-            </span>
-            <Link
+            </Contacts.Title>
+            <OpenLink
               href={introduce.blog}
               target='_blank'
-              className={twclsx(
-                'text-link',
-                'text-secondary-75',
-                'inline-flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-                'underline',
-              )}
             >
               {introduce.blog}
-              <FiExternalLink />
-            </Link>
-          </li>
+            </OpenLink>
+          </Contacts.Item>
         )}
-      </ul>
+      </Contacts>
       <h2 className={twclsx('text-h2', 'text-dark-100', 'mb-[12px]')}>
         이런 스킬을 가지고 있습니다.
       </h2>

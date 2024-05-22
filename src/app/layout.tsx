@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ReactNode } from 'react';
 import Head from 'next/head';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: '프론트엔드 개발자 - 박철우',
@@ -27,6 +28,7 @@ export default function RootLayout({
         />
       </Head>
       <body>{children}</body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );
 }

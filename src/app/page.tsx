@@ -47,12 +47,18 @@ export default async function Home() {
       ]);
     if (introduceResponse.status === 'fulfilled') {
       introduce = introduceResponse.value;
+    } else {
+      console.error(introduceResponse.reason);
     }
     if (skillsResponse.status === 'fulfilled') {
       skills = skillsResponse.value;
+    } else {
+      console.error(skillsResponse.reason);
     }
     if (experiencesResponse.status === 'fulfilled') {
       experiences = experiencesResponse.value;
+    } else {
+      console.error(experiencesResponse.reason);
     }
   } catch (err) {
     if (isFetchApiError(err)) {

@@ -26,4 +26,19 @@ describe('urlHelper module', () => {
     const url = parseUrl('http://localhost:3000', '/api/test');
     expect(url).toBe('http://localhost:3000/api/test');
   });
+
+  test('urlHelper test 5', () => {
+    const url = parseUrl('http://localhost:3000', '/api/test', {
+      name: ['jim', 'tom'],
+    });
+    expect(url).toBe('http://localhost:3000/api/test?name=jim,tom');
+  });
+
+  test('urlHelper test 5', () => {
+    const url = parseUrl('http://localhost:3000', '/api/test', {
+      id: 1,
+      name: ['jim', 'tom'],
+    });
+    expect(url).toBe('http://localhost:3000/api/test?id=1&name=jim,tom');
+  });
 });

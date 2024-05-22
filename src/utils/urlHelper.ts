@@ -3,10 +3,11 @@ export const parseUrl = (
   path: string,
   params?: Record<string, any>,
 ) => {
-  const { origin, pathname, searchParams } = new URL(
-    `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`,
-  );
-  return `${origin}${pathname}${parseParams({ ...params, ...searchParams })}`;
+  const prefix = `${baseUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+  const queryString = parseParams(params);
+  return `${prefix}${
+    prefix.includes('?') ? '&' + queryString.slice(1) : queryString
+  }`;
 };
 
 export const parseParams = (params?: Record<string, any>) => {

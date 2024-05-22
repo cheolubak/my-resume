@@ -15,6 +15,9 @@ import { FiExternalLink } from 'react-icons/fi';
 import { LuSend } from 'react-icons/lu';
 
 export default async function Home() {
+  console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL);
+  console.log('process.env.NEXT_PUBLIC_GA_ID', process.env.NEXT_PUBLIC_GA_ID);
+
   revalidateTag('introduce');
   revalidateTag('skills');
   revalidateTag('experience');

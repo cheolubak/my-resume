@@ -18,6 +18,10 @@ import Description from '@/components/Description';
 import Contacts from '@/components/Contacts';
 import OpenLink from '@/components/OpenLink';
 import MailLink from '@/components/MailLink';
+import Skills from '@/components/Skills';
+import Experiences from '@/components/Experiences';
+import Company from '@/components/Company';
+import Service from '@/components/Service';
 
 export default async function Home() {
   console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL);
@@ -72,7 +76,7 @@ export default async function Home() {
   }
 
   return (
-    <main className={twclsx('p-[20px]')}>
+    <main className={twclsx('p-[36px]')}>
       {introduce?.intro && (
         <h2 className={twclsx('text-h2', 'text-dark-100')}>
           {introduce.intro}
@@ -128,160 +132,72 @@ export default async function Home() {
           </Contacts.Item>
         )}
       </Contacts>
-      <h2 className={twclsx('text-h2', 'text-dark-100', 'mb-[12px]')}>
-        이런 스킬을 가지고 있습니다.
-      </h2>
-      <ul className={twclsx('flex', ' flex-col', 'gap-[8px]', 'mb-[48px]')}>
+      <SubTitle>이런 스킬을 가지고 있습니다.</SubTitle>
+      <Skills>
         {skills.map((skill) => (
-          <li
-            className={twclsx(
-              'flex',
-              'justify-start',
-              'items-center',
-              'gap-[12px]',
-            )}
-            key={skill.id}
-          >
-            <strong
-              className={twclsx(
-                'text-bold',
-                'text-dark-75',
-                'w-[160px]',
-                'min-w-[160px]',
-                'max-w-[160px]',
-                'whitespace-nowrap',
-              )}
-            >
-              {skill.title}
-            </strong>
-            <div
-              className={twclsx(
-                'w-full',
-                'flex',
-                'justify-start',
-                'items-center',
-                'gap-[8px]',
-              )}
-            >
-              <div
-                className={twclsx('bg-secondary-100', 'h-2')}
-                style={{ width: `${(100 / 5) * skill.level}%` }}
-              />
-              <span className={twclsx('text-pretitle', 'text-lightslate')}>
-                {20 * skill.level}%
-              </span>
-            </div>
-          </li>
+          <Skills.Item key={skill.id}>
+            <Skills.Title>{skill.title}</Skills.Title>
+            <Skills.Rate percent={skill.level * 20} />
+          </Skills.Item>
         ))}
-      </ul>
-      <h2 className={twclsx('text-h2', 'text-dark-100', 'mb-[12px]')}>
-        이런 경험을 가지고 있습니다.
-      </h2>
-      <ul className={twclsx('flex', 'flex-col', 'gap-[24px]', 'mb-[48px]')}>
+      </Skills>
+      <SubTitle>이런 경험을 가지고 있습니다.</SubTitle>
+      <Experiences>
         {experiences.map((experience) => (
-          <li
-            key={experience.id}
-            className={twclsx(
-              'flex',
-              'justify-start',
-              'items-start',
-              'gap-[24px]',
-            )}
-          >
-            <div
-              className={twclsx(
-                'w-[200px]',
-                'min-w-[200px]',
-                'flex',
-                'flex-col',
-                'justify-start',
-                'items-start',
-                'gap-[4px]',
-              )}
-            >
-              <h3 className={twclsx('text-h3', 'text-dark-100')}>
-                {experience.name}
-              </h3>
-              <strong className={twclsx('text-bold', 'text-dark-75')}>
-                {experience.position}
-              </strong>
-              <span className={twclsx('text-body', 'text-lightslate')}>
+          <Experiences.Item key={experience.id}>
+            <Company>
+              <Company.Name>{experience.name}</Company.Name>
+              <Company.Position>{experience.position}</Company.Position>
+              <Company.Date>
                 {betweenDates(experience.start, experience.end)}
-              </span>
+              </Company.Date>
               <Label
                 size='sm'
                 theme='secondary'
               >
                 {getRangeDates(experience.start, experience.end)}
               </Label>
-            </div>
-            <div
-              className={twclsx(
-                'flex',
-                'flex-col',
-                'justify-start',
-                'items-start',
-                'gap-[4px]',
-              )}
-            >
-              <span
-                className={twclsx('text-body', 'text-lightslate', 'mb-[12px]')}
-              >
+            </Company>
+            <Service>
+              <Service.Description>
                 {experience.description}
-              </span>
+              </Service.Description>
               {experience.serviceLink ? (
-                <Link
-                  className={twclsx(
-                    'text-link',
-                    'text-secondary-75',
-                    'underline',
-                    'mb-[12px]',
-                  )}
+                <OpenLink
                   href={experience.serviceLink}
                   target='_blank'
+                  className={twclsx('mb-[12px]')}
                 >
                   서비스 보러가기
-                </Link>
+                </OpenLink>
               ) : (
-                <span
-                  className={twclsx('text-link', 'text-dark-50', 'mb-[12px]')}
-                >
-                  서비스 종료
-                </span>
+                <Service.Over>서비스 종료</Service.Over>
               )}
-              <ul
-                className={twclsx(
-                  'flex',
-                  'flex-col',
-                  'gap-[8px]',
-                  'mb-[16px]',
-                  'list-disc',
-                )}
-              >
+              <Service.List>
                 {experience.works.map((work) => (
-                  <li key={work.id}>{work.title}</li>
+                  <Service.Item key={work.id}>
+                    {work.title}
+                    {work.description && (
+                      <span className={twclsx('text-small', 'text-lightslate')}>
+                        • {work.description}
+                      </span>
+                    )}
+                  </Service.Item>
                 ))}
-              </ul>
+              </Service.List>
 
-              <ul
-                className={twclsx(
-                  'flex',
-                  'flex-wrap',
-                  'justify-start',
-                  'items-center',
-                  'gap-2',
-                )}
-              >
+              <Service.Skills>
                 {experience.skills.map((skill) => (
-                  <li key={skill.id}>
-                    <Label theme='dark'>{skill.title}</Label>
-                  </li>
+                  <Service.Skill
+                    key={skill.id}
+                    title={skill.title}
+                  />
                 ))}
-              </ul>
-            </div>
-          </li>
+              </Service.Skills>
+            </Service>
+          </Experiences.Item>
         ))}
-      </ul>
+      </Experiences>
     </main>
   );
 }

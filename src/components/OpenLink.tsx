@@ -5,7 +5,7 @@ import { FiExternalLink } from 'react-icons/fi';
 
 interface OpenLinkProps extends Omit<ComponentProps<'a'>, 'href'>, LinkProps {}
 
-function OpenLink({ children, ...props }: OpenLinkProps) {
+function OpenLink({ children, className, ...props }: OpenLinkProps) {
   return (
     <Link
       {...props}
@@ -17,6 +17,7 @@ function OpenLink({ children, ...props }: OpenLinkProps) {
         'items-center',
         'gap-[8px]',
         'underline',
+        className,
       )}
     >
       {children}

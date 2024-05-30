@@ -7,14 +7,9 @@ import { Experience } from '@/models/experience';
 import { revalidateTag } from 'next/cache';
 import { betweenDates, getRangeDates } from '@/utils/dateHelper';
 import Label from '@/components/Label';
-import Link from 'next/link';
-import { MdEmail } from 'react-icons/md';
 import { FaGithub } from 'react-icons/fa';
 import { SiTistory } from 'react-icons/si';
-import { FiExternalLink } from 'react-icons/fi';
-import { LuSend } from 'react-icons/lu';
 import SubTitle from '@/components/SubTitle';
-import Description from '@/components/Description';
 import Contacts from '@/components/Contacts';
 import OpenLink from '@/components/OpenLink';
 import MailLink from '@/components/MailLink';
@@ -22,11 +17,10 @@ import Skills from '@/components/Skills';
 import Experiences from '@/components/Experiences';
 import Company from '@/components/Company';
 import Service from '@/components/Service';
+import { Typography } from '@mui/material';
+import { Email, GitHub } from '@mui/icons-material';
 
 export default async function Home() {
-  console.log('process.env.NEXT_PUBLIC_URL', process.env.NEXT_PUBLIC_URL);
-  console.log('process.env.NEXT_PUBLIC_GA_ID', process.env.NEXT_PUBLIC_GA_ID);
-
   revalidateTag('introduce');
   revalidateTag('skills');
   revalidateTag('experience');
@@ -78,42 +72,86 @@ export default async function Home() {
   return (
     <main className={twclsx('p-[36px]')}>
       {introduce?.intro && (
-        <h2 className={twclsx('text-h2', 'text-dark-100')}>
+        <Typography
+          className={twclsx('font-bold', 'text-blue-600')}
+          component='h2'
+          variant='h4'
+          mb={1}
+        >
           {introduce.intro}
-        </h2>
+        </Typography>
       )}
       {introduce?.title && (
-        <h1 className={twclsx('text-h1', 'text-dark-100', 'mb-[12px]')}>
+        <Typography
+          className={twclsx('font-bold', 'text-gray-800')}
+          component='h1'
+          variant='h2'
+          mb={2}
+        >
           {introduce.title}
-        </h1>
+        </Typography>
       )}
       {introduce?.description && (
-        <Description>{introduce.description}</Description>
+        <Typography
+          className={twclsx('font-medium', 'text-gray-700')}
+          variant='h6'
+          component='p'
+          mb={8}
+        >
+          {introduce.description}
+        </Typography>
       )}
-      <SubTitle>Contact.</SubTitle>
+      <Typography
+        className={twclsx('font-bold', 'text-gray-600')}
+        component='h3'
+        variant='h4'
+        mb={3}
+      >
+        Contact.
+      </Typography>
       <Contacts>
         {introduce?.email && (
           <Contacts.Item>
             <Contacts.Title>
-              <MdEmail size={24} />
-              Email.
+              <Email fontSize='medium' />
+              <Typography
+                variant='body1'
+                component='strong'
+              >
+                Email.
+              </Typography>
             </Contacts.Title>
             <MailLink href={`mailto:${introduce.email}`}>
-              {introduce.email}
+              <Typography
+                variant='button'
+                component='a'
+              >
+                {introduce.email}
+              </Typography>
             </MailLink>
           </Contacts.Item>
         )}
         {introduce?.git && (
           <Contacts.Item>
             <Contacts.Title>
-              <FaGithub size={24} />
-              Git.
+              <GitHub fontSize='medium' />
+              <Typography
+                variant='body1'
+                component='strong'
+              >
+                Git.
+              </Typography>
             </Contacts.Title>
             <OpenLink
               href={introduce.git}
               target='_blank'
             >
-              {introduce.git}
+              <Typography
+                variant='button'
+                component='a'
+              >
+                {introduce.git}
+              </Typography>
             </OpenLink>
           </Contacts.Item>
         )}
@@ -121,26 +159,27 @@ export default async function Home() {
           <Contacts.Item>
             <Contacts.Title>
               <SiTistory size={24} />
-              Blog.
+              <Typography
+                variant='body1'
+                component='strong'
+              >
+                Blog.
+              </Typography>
             </Contacts.Title>
             <OpenLink
               href={introduce.blog}
               target='_blank'
             >
-              {introduce.blog}
+              <Typography
+                variant='button'
+                component='a'
+              >
+                {introduce.blog}
+              </Typography>
             </OpenLink>
           </Contacts.Item>
         )}
       </Contacts>
-      <SubTitle>이런 스킬을 가지고 있습니다.</SubTitle>
-      <Skills>
-        {skills.map((skill) => (
-          <Skills.Item key={skill.id}>
-            <Skills.Title>{skill.title}</Skills.Title>
-            <Skills.Rate percent={skill.level * 20} />
-          </Skills.Item>
-        ))}
-      </Skills>
       <SubTitle>이런 경험을 가지고 있습니다.</SubTitle>
       <Experiences>
         {experiences.map((experience) => (
@@ -198,6 +237,25 @@ export default async function Home() {
           </Experiences.Item>
         ))}
       </Experiences>
+      <SubTitle>이런 스킬을 가지고 있습니다.</SubTitle>
+      <Skills>
+        {skills.map((skill) => (
+          <Skills.Item key={skill.id}>
+            <Skills.Title>{skill.title}</Skills.Title>
+            <Skills.Content>
+              {Array.isArray(skill.description) ? (
+                skill.description.map((desc, idx) => (
+                  <Skills.Description key={`${skill.id}-${idx}`}>
+                    · {desc}
+                  </Skills.Description>
+                ))
+              ) : (
+                <Skills.Description>· {skill.description}</Skills.Description>
+              )}
+            </Skills.Content>
+          </Skills.Item>
+        ))}
+      </Skills>
     </main>
   );
 }

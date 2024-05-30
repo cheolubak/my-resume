@@ -16,7 +16,7 @@ const Contacts: ContactComponent = ({ ...props }: ContactsProps) => {
   return (
     <ul
       {...props}
-      className={twclsx('flex', 'flex-col', 'gap-[12px]', 'mb-[48px]')}
+      className={twclsx('flex', 'flex-col', 'gap-[12px]', 'mb-[120px]')}
     />
   );
 };

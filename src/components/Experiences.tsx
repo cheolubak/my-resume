@@ -13,7 +13,7 @@ const Experiences: ExperienceComponent = ({ ...props }: ExperiencesProps) => {
   return (
     <ul
       {...props}
-      className={twclsx('flex', 'flex-col', 'gap-[36px]', 'mb-[48px]')}
+      className={twclsx('flex', 'flex-col', 'gap-[36px]', 'mb-[120px]')}
     />
   );
 };

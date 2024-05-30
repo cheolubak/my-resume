@@ -11,10 +11,16 @@ interface SkillRateProps extends ComponentProps<'span'> {
   percent: number;
 }
 
+interface SkillDescriptionProps extends ComponentProps<'p'> {}
+
+interface SkillContentProps extends ComponentProps<'div'> {}
+
 interface SkillComponent extends React.FC<SkillsProps> {
   Item: FC<SkillProps>;
   Title: FC<SkillTitleProps>;
   Rate: FC<SkillRateProps>;
+  Description: FC<SkillDescriptionProps>;
+  Content: FC<SkillContentProps>;
 }
 
 const Skills: SkillComponent = ({ ...props }: SkillsProps) => {
@@ -38,9 +44,13 @@ Skills.Item = function Skill({ ...props }: SkillProps) {
         'lg:flex-row',
         'justify-start',
         'items-stretch',
-        'lg:items-center',
+        'lg:items-start',
         'gap-[8px]',
         'lg:gap-[12px]',
+        'sticky',
+        'top-[24px]',
+        'bg-white',
+        'min-h-[150px]',
       )}
     />
   );
@@ -51,11 +61,11 @@ Skills.Title = function SkillTitle({ ...props }: SkillTitleProps) {
     <strong
       {...props}
       className={twclsx(
-        'text-bold',
+        'text-subtitle',
         'text-dark-75',
-        'w-[160px]',
-        'min-w-[160px]',
-        'max-w-[160px]',
+        'w-[220px]',
+        'min-w-[220px]',
+        'max-w-[220px]',
         'whitespace-nowrap',
       )}
     />
@@ -85,5 +95,31 @@ Skills.Rate = function SkillRate({ percent, ...props }: SkillRateProps) {
         {percent}%
       </span>
     </div>
+  );
+};
+
+Skills.Description = function SkillDescription({
+  ...props
+}: SkillDescriptionProps) {
+  return (
+    <p
+      {...props}
+      className={twclsx('text-body', 'text-dark-75')}
+    />
+  );
+};
+
+Skills.Content = function SkillContent({ ...props }: SkillContentProps) {
+  return (
+    <div
+      {...props}
+      className={twclsx(
+        'flex',
+        'flex-col',
+        'justify-start',
+        'items-stretch',
+        'gap-2',
+      )}
+    />
   );
 };

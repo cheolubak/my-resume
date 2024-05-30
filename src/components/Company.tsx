@@ -32,6 +32,10 @@ const Company: CompanyComponent = ({ ...props }: CompanyInfoProps) => {
         'gap-x-[12px]',
         'gap-y-[8px]',
         'lg:gap-[4px]',
+        'sticky',
+        'top-0',
+        'pt-[24px]',
+        'bg-white',
       )}
     />
   );

@@ -8,7 +8,7 @@ export function GET() {
 현재에 만족하지 않고 지속적으로 새로운 기술과 지식을 습득하고, 더 나은 개발자가 되기 위해 항상 고민을 하고 노력하고 있습니다.
 그리고 다른 직군과 원할한 커뮤니케이션과 앞으로 더 성장하기 위해 기획과 UI/UX, 그리고 GA같은 데이터에도 관심을 가지고 학습을 하려고 노력하고 있습니다.`,
     email: 'dev.cheolubak@gmail.com',
-    blog: 'dev-bak.tistory.com',
+    blog: 'https://dev-bak.tistory.com',
     git: 'https://github.com/cheolubak',
   };
 

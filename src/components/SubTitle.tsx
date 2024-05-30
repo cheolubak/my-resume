@@ -7,7 +7,7 @@ function SubTitle({ ...props }: SubTitleProps) {
   return (
     <h2
       {...props}
-      className={twclsx('text-h3', 'mb-[12px]')}
+      className={twclsx('text-h3', 'mb-[36px]')}
     />
   );
 }
